@@ -15,7 +15,16 @@ require_once("config.php");
 
 
 //Carrega uma lista de usuarios
-$lista = Usuario::getList();//como o método na classe Sql é "static", não preciso instanciar a classeSql, basta chamá-la diretamente.
+//$lista = Usuario::getList();//como o método na classe Sql é "static", não preciso instanciar a classeSql, basta chamá-la diretamente.
 
-echo json_encode($lista);
+//Carrega uma lista de Usuários buscando pelo login
+//$search = Usuario::search("jo");
+//echo json_encode($search);
+
+//carrega um Usuário usando o login e a senha
+$usuario =new Usuario();
+$usuario->login("root", "!@#$");
+
+echo $usuario;
+
 ?>

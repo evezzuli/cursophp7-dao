@@ -55,6 +55,7 @@ class Usuario {
 			$this->setDessenha($row['dessenha']);
 			$this->setDtcadastro(new DateTime($row['dtcadastro']));
 		}
+
 	}		
 
 	public static function getList(){
@@ -63,6 +64,34 @@ class Usuario {
 		
 		return $sql -> select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
 	}
+
+
+public function login(login, $password){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(
+			":LOGIN"=>$login,
+			":PASSWORD"=>$password
+		));
+
+		if (count($results) > 0) {
+
+			$row = $results[0];
+
+			$this->setIdusuario($row['idusuario']);
+			$this->setDeslogin($row['deslogin']);
+			$this->setDessenha($row['dessenha']);
+			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+		
+		}else {
+
+			throw new Exception("Login e/ou senha inválidos");
+		}
+
+
+}
+
 
 	public function __toString(){
 
@@ -75,5 +104,6 @@ class Usuario {
 		));
 	}
 }
+
 
 ?>
